@@ -1,0 +1,62 @@
+{
+  // Global Editor
+  "git.ignoreLimitWarning": true,
+  "files.insertFinalNewline": true,
+  "editor.fontFamily": "Comic Mono",
+  "editor.tabSize": 2,
+  // Python
+  "python.languageServer": "Pylance",
+  "python.testing.pytestArgs": ["test"],
+  "python.testing.pytestEnabled": true,
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+
+  // JS/TS
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  // Languages
+  "[python]": {
+    "editor.tabSize": 4
+  },
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[javascriptreact]": {
+    "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.tabSize": 2
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.tabSize": 2
+  },
+
+
+  // Run on Save Python
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "cmd": ".venv/bin/isort --sp pyproject.toml ${file}",
+        "isAsync": true,
+        "match": "\\.py$"
+      },
+      {
+        "cmd": ".venv/bin/black --config pyproject.toml ${file}",
+        "isAsync": true,
+        "match": "\\.py$"
+      }
+    ]
+  },
+
+  // GitHub workflows 
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": [
+      "file:///Users/rafal/Projects/pyritsu/.github/workflows/t.yml"
+    ]
+  }
+}

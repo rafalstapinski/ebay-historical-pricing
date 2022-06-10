@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "ehp"
+version = "0.1.0"
+description = "get recent sale prices for stuff"
+authors = ["Rafal <stapinskirafal@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "^0.23.0"
+aiosqlite = "^0.17.0"
+structlog = "^21.5.0"
+elastic-apm = "^6.9.1"
+beautifulsoup4 = "^4.11.1"
+pydantic = "^1.9.1"
+p3orm = "^0.5.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+pylint = "^2.14.1"
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+known_local_folder = ["test"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.black]
+line-length = 120
+
+[tool.pylint.messages_control]
+max-line-length = 120
+disable = "all"
+enable = "unused-import"
