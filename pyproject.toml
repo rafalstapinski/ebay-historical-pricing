@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "ehp"
+name = "ebay-historical-prices"
 version = "0.1.0"
-description = "get recent sale prices for stuff"
+description = "scrape ebay for prices of sold items"
 authors = ["Rafal <stapinskirafal@gmail.com>"]
 license = "MIT"
 
