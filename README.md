@@ -7,10 +7,11 @@ i made this because i want to track the prices of film cameras over time. its pr
 2. collects the name, price, date, and a couple other things
 3. persists them idempotently in a postgres table
 
-its definitely not comprehensive or robust but should give a good enough set of data over time 🤷
+its not very comprehensive nor robust but should give a good enough set of data over time 🤷
 
 ## how to run
 
+### set a couple of env variables
 ```
 PYTHONPATH=.
 ENV=dev
