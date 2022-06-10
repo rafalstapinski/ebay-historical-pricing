@@ -28,7 +28,7 @@ def normalize_query(name: str) -> str:
     return name.lower().replace(" ", "+")
 
 
-async def persist_sale_metadatas(item: Item, sale_metadatas: list[SaleMetadata]) -> list[Sale]:
+async def persist_sales(item: Item, sale_metadatas: list[SaleMetadata]) -> list[Sale]:
 
     existing_sales = await Sale.fetch_all(Sale.listing_url.isin([s.listing_url for s in sale_metadatas]))
     existing_sale_urls = [s.listing_url for s in existing_sales]
@@ -116,11 +116,16 @@ async def scrape_and_persist_ebay_sales():
 
     items = await Item.fetch_all(Item.deleted_at.isnull())
 
+    all_persisted_sales = []
+
     for item in items:
         found_sale_metadatas = await get_sale_metadatas_for_item(item)
-        persisted_sale_metadatas = await persist_sale_metadatas(item, found_sale_metadatas)
+        persisted_sales = await persist_sales(item, found_sale_metadatas)
 
-        logger.info(f"processed {item.name=} {len(found_sale_metadatas)=} {len(persisted_sale_metadatas)=}")
+        logger.info(f"processed {item.name=} {len(found_sale_metadatas)=} {len(persisted_sales)=}")
+        all_persisted_sales += persisted_sales
+
+    return all_persisted_sales
 
 
 async def run():
@@ -128,7 +133,8 @@ async def run():
     await Porm.connect(Settings.DATABASE_URL)
 
     try:
-        await scrape_and_persist_ebay_sales()
+        persisted_sales = await scrape_and_persist_ebay_sales()
+        logger.info(f"persisted a total of {len(persisted_sales)} sales")
     except Exception as e:
         log_exception(logger.exception, "error running", e)
 
