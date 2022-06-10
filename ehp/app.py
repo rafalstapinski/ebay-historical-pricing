@@ -127,10 +127,10 @@ async def run():
 
     await Porm.connect(Settings.DATABASE_URL)
 
-    # try:
-    await scrape_and_persist_ebay_sales()
-    # except Exception as e:
-    # log_exception(logger.exception, "error running", e)
+    try:
+        await scrape_and_persist_ebay_sales()
+    except Exception as e:
+        log_exception(logger.exception, "error running", e)
 
     await Porm.disconnect()
 
